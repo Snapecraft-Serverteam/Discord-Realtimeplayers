@@ -15,17 +15,18 @@ public class Main {
     public static Message msg;
     public static File config = new File("config.json");
     public static void main(String[] args) throws LoginException {
+        /*
         if(!config.exists()) {
             try {
                 config.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         JDABuilder builder = new JDABuilder(args[0]);
         builder.addEventListeners(new Listener());
         JDA bot = builder.build();
-        Data.loadData(bot);
+        //Data.loadData(bot);
         if(isSetup) {
             Data.refreshData();
             Listener.startTimer();

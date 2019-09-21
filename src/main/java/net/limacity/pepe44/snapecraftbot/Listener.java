@@ -23,12 +23,12 @@ public class Listener extends ListenerAdapter {
 
         if (event.getAuthor().isBot()){
 
-            if(event.getAuthor().getId().equals("615224075769479191")) {
+            if(event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
 
                 if(event.getMessage().getContentDisplay().equals(krasseLine)) {
                     Main.msg = event.getMessage();
                     Main.isSetup = true;
-                    Data.save();
+                    //Data.save();
                     Data.refreshData();
                     startTimer();
                 }

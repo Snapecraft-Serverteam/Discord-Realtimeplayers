@@ -18,6 +18,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,12 +40,16 @@ public class Data {
         if(data == null) { return; }
 
         JSONObject json = new JSONObject(data);
+        int full = 0;
         for (String key: json.keySet()) {
             JSONArray array = json.getJSONArray(key);
+            full = full + array.length();
             output.addField(key, "Online: " + array.length(), true);
             //output = output + key + ":" + array.length() + " Spieler Online.\n";
         }
-
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd. MM. yyyy");
+        output.setFooter("Zuletzt aktuallisiert: " + format.format(new Date()));
+        output.setTitle("Unsere Server: " + full + " Spieler online");
         Main.msg.editMessage(output.build()).queue();
     }
 
@@ -111,8 +117,11 @@ public class Data {
             if(guildid == null) { return; }
             if(channelid == null) { return; }
             if(msgid == null) { return; }
-
+            System.out.println(guildid);
             Guild guild = jda.getGuildById(guildid);
+
+            if(guild == null) {
+                System.out.println("Guild 0"); return; }
 
             TextChannel channel = guild.getTextChannelById(channelid);
 
@@ -126,7 +135,8 @@ public class Data {
 
             List<Message> messages = history.retrievePast(history.size()).complete();
 
-            if(messages.size() == 0) { return; }
+            if(messages.size() == 0) {
+                System.out.println("Size 0"); return; }
 
 
             for (Message msg : messages) {

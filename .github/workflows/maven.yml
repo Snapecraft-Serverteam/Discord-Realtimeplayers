@@ -22,3 +22,8 @@ jobs:
       with:
         name: Jar Artifact
         path: /home/runner/work/Discord-Realtimeplayers/Discord-Realtimeplayers/target/SnapecraftBOT-1.0-SNAPSHOT.jar
+    - name: Webhook
+      uses: joelwmale/webhook-action@master
+      env:
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        data: '{"api": "/repos/$GITHUB_REPOSITORY/actions/artifacts"}'

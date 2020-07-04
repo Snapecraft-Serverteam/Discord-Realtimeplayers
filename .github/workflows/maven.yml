@@ -21,7 +21,7 @@ jobs:
       name: "Puplish Artifact"
       with:
         name: Jar Artifact
-        path: "*.jar"
+        path: /home/runner/work/**/**/target/*.jar
     - name: Webhook
       uses: joelwmale/webhook-action@master
       env:

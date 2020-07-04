@@ -17,3 +17,8 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - uses: actions/upload-artifact@v2
+      name: "Puplish Artifact"
+      with:
+        name: Jar Artifact
+        path: /home/runner/work/Discord-Realtimeplayers/Discord-Realtimeplayers/target/SnapecraftBOT-1.0-SNAPSHOT.jar
